@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>James (Wolfe) Harrison - Format Standardization & AI Infrastructure</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <meta name="description" content="James (Wolfe) Harrison, founder of Wolfe James LLC. Creator of the IANA-registered .faf format for AI context. IETF AIPREF working group member. 30 years of format standardization experience.">
+
+    <!-- SEO & Professional Discovery -->
+    <meta name="keywords" content="James Harrison, Wolfe James LLC, .faf format, IANA registration, IETF, format standardization, AI context, software architecture, technical standards">
+    <meta name="author" content="James (Wolfe) Harrison">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://wolfejames.com">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wolfejames.com">
+    <meta property="og:title" content="James (Wolfe) Harrison - Format Standardization Expert">
+    <meta property="og:description" content="Creator of IANA-registered .faf format. IETF AIPREF member. 30 years designing formats that last.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://wolfejames.com">
+    <meta property="twitter:title" content="James (Wolfe) Harrison">
+    <meta property="twitter:description" content="Format standardization and AI infrastructure. IANA + IETF standards work.">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "James Harrison",
+        "alternateName": "James Wolfe Harrison",
+        "jobTitle": "Founder",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Wolfe James LLC"
+        },
+        "description": "Format standardization expert. Creator of IANA-registered .faf format for AI context. IETF AIPREF working group member.",
+        "url": "https://wolfejames.com",
+        "sameAs": [
+            "https://github.com/Wolfe-Jam",
+            "https://orcid.org/0009-0007-0801-3841",
+            "https://faf.one"
+        ],
+        "knowsAbout": [
+            "Format Standardization",
+            "AI Context Formats",
+            "Software Architecture",
+            "Technical Standards Bodies",
+            "IANA Media Type Registration",
+            "IETF Standards Process"
+        ]
+    }
+    </script>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-primary: #fefcf8;
+            --bg-secondary: #f9f6f1;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #7a7a7a;
+            --accent: #FF6B35;
+            --accent-hover: #e55a2b;
+            --border: #e5e5e5;
+            --code-bg: #f5f5f5;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #d0d0d0;
+            --text-muted: #a0a0a0;
+            --accent: #FF6B35;
+            --accent-hover: #ff8a5c;
+            --border: #333333;
+            --code-bg: #262626;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        /* WolfejamGizmo - Signature half-moon theme toggle */
+        .wolfejam-gizmo {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            outline: none;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .wolfejam-gizmo__gradient {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFF 50%, #121212 50%);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .wolfejam-gizmo__gradient--dark {
+            transform: rotate(180deg);
+        }
+
+        .wolfejam-gizmo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 16px rgba(0, 255, 255, 0.3);
+        }
+
+        .wolfejam-gizmo:active {
+            transform: scale(0.95);
+        }
+
+        .wolfejam-gizmo:focus {
+            outline: 2px solid #00FFFF;
+            outline-offset: 2px;
+        }
+
+        .wolfejam-gizmo:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .wolfejam-gizmo__tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .wolfejam-gizmo:hover .wolfejam-gizmo__tooltip {
+            opacity: 1;
+        }
+
+        .wolfejam-gizmo__tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid rgba(0, 0, 0, 0.9);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wolfejam-gizmo,
+            .wolfejam-gizmo * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wolfejam-gizmo {
+                width: 44px;
+                height: 44px;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 6vw, 64px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.1;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .hero .tagline {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Standards Work Section */
+        .standards {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+            border-radius: 16px;
+            margin: 0 24px 80px;
+        }
+
+        .standards-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .standards h2 {
+            font-size: 36px;
+            margin-bottom: 48px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .achievement {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .achievement h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .achievement p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .achievement-meta {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+        }
+
+        .projects h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 64px;
+            font-weight: 600;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 12px 24px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h3 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .contact-form button {
+            padding: 12px 24px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .standards,
+            .contact {
+                margin: 0 0 60px;
+                padding: 60px 0;
+            }
+
+            .projects {
+                padding: 60px 0;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-link {
+                width: 200px;
+            }
+
+            .modal-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WolfejamGizmo - Signature theme toggle -->
+    <button class="wolfejam-gizmo" id="themeToggle" aria-label="Toggle theme">
+        <div class="wolfejam-gizmo__gradient" id="themeGradient"></div>
+        <div class="wolfejam-gizmo__tooltip" id="themeTooltip">Dark Mode</div>
+    </button>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">Wolfe James LLC</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>James (Wolfe) Harrison</h1>
+                <p class="subtitle">Format Standardization, AI Infrastructure, Software Engineering & Development</p>
+                <p class="tagline">30 years designing formats that last. From Commodore Amiga to Internet AI standards, building technical infrastructure you can trust for the AI era.</p>
+            </div>
+        </section>
+
+        <section class="standards">
+            <div class="standards-content">
+                <h2>Standards Body Work</h2>
+
+                <div class="achievement">
+                    <h3>IANA Media Type Registration</h3>
+                    <p>
+                        Registered <code>application/vnd.faf+yaml</code> as an official Internet media type with IANA (Internet Assigned Numbers Authority).
+                        The .faf format is the first and only IANA-registered format with an official Anthropic MCP server.
+                    </p>
+                    <p class="achievement-meta">October 31, 2025 • <a href="https://www.iana.org/assignments/media-types/application/vnd.faf+yaml" class="project-link" target="_blank">View Registration</a></p>
+                </div>
+
+                <div class="achievement">
+                    <h3>IETF AIPREF Working Group</h3>
+                    <p>
+                        Member of the Internet Engineering Task Force's AI Preferences working group (AIPREF).
+                        Contributing practical implementation experience from production AI context format deployment.
+                    </p>
+                    <p class="achievement-meta">November 2025 • Active participation in vocabulary standardization</p>
+                </div>
+
+                <div class="achievement">
+                    <h3>W3C Community Group</h3>
+                    <p>
+                        Founding the "AI Context Formats Community Group" at W3C to develop open standards for AI development tool context exchange.
+                        Path to W3C Recommendation and browser-native support.
+                    </p>
+                    <p class="achievement-meta">Planned Q1 2026 • Web platform integration standards</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="projects">
+            <div class="container">
+                <h2>Notable Projects</h2>
+
+                <div class="project-card">
+                    <h3>.faf Format (Foundational AI-context Format)</h3>
+                    <p>
+                        Universal format for AI project context. IANA-registered, validated by Anthropic (official MCP server),
+                        Google-approved (2 Chrome extensions), and in production use across 10,000+ projects.
+                    </p>
+                    <p>
+                        <strong>Downloads:</strong> 10.5k across CLI and MCP implementations<br>
+                        <strong>Performance:</strong> <50ms processing time<br>
+                        <strong>Validation:</strong> Tested with Claude, Gemini, OpenAI Codex
+                    </p>
+                    <a href="https://faf.one" class="project-link" target="_blank">Visit faf.one →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>claude-faf-mcp (Model Context Protocol Server)</h3>
+                    <p>
+                        <strong>First and only Anthropic-approved persistent project context server.</strong>
+                        Official MCP implementation merged into Anthropic's registry (PR #2759, October 2025).
+                    </p>
+                    <p>
+                        Provides 33 MCP tools for comprehensive project context management in Claude Desktop.
+                        The only format-driven persistent context solution in the MCP ecosystem.
+                    </p>
+                    <p>
+                        <strong>Status:</strong> Official Anthropic MCP registry<br>
+                        <strong>Weekly Downloads:</strong> 800+<br>
+                        <strong>Architecture:</strong> stdio transport, 33 tools
+                    </p>
+                    <a href="https://github.com/Wolfe-Jam/claude-faf-mcp" class="project-link" target="_blank">View on GitHub →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Historical Format Work (1995-2025)</h3>
+                    <p>
+                        <strong>Commodore Amiga .iff format (1994-1995):</strong> Early exposure to interchange file formats that shaped approach to format design.
+                    </p>
+                    <p>
+                        <strong>Carpet Industry .prj format (1995):</strong> Created format for design specifications used by manufacturers across US, UK, Europe, India, Australia, and New Zealand. Still in use today.
+                    </p>
+                    <p>
+                        <strong>CAD-SIM .sim format (2000-2016):</strong> Digital simulation format for US Carpet Industry.
+                        Deployed industry-wide at scale. Technology acquired by Shaw Industries (Berkshire Hathaway) in 2016.
+                    </p>
+                    <p>
+                        <strong>HEX CODES - Hextra.io (2020-2025, ongoing):</strong> In-depth exploration of HEX/RGB/HSV-L color-space.
+                        Research and development in color format standardization and computational color theory.
+                    </p>
+                    <p>
+                        <strong>AI R&D and Testing (2023-present):</strong> Extensive AI exploration and testing methodology development.
+                        Built WJTTC (WolfeJam Technical & Testing Center) - F1-inspired testing framework applying championship-grade standards to software development.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h2>Contact & Credentials</h2>
+                <div class="contact-links">
+                    <button class="contact-link" id="openModal">Drop a Line</button>
+                    <a href="https://github.com/Wolfe-Jam" class="contact-link" target="_blank">GitHub</a>
+                    <a href="https://orcid.org/0009-0007-0801-3841" class="contact-link" target="_blank">ORCID</a>
+                    <a href="https://faf.one" class="contact-link" target="_blank">faf.one</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Drop a Line</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Quick message (one-liner is fine)" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Wolfe James LLC. Format standardization and AI infrastructure.</p>
+        </div>
+    </footer>
+
+    <script>
+        // WolfejamGizmo theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeGradient = document.getElementById('themeGradient');
+        const themeTooltip = document.getElementById('themeTooltip');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        updateTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateTheme(newTheme);
+        });
+
+        function updateTheme(theme) {
+            if (theme === 'dark') {
+                themeGradient.classList.add('wolfejam-gizmo__gradient--dark');
+                themeTooltip.textContent = 'Light Mode';
+            } else {
+                themeGradient.classList.remove('wolfejam-gizmo__gradient--dark');
+                themeTooltip.textContent = 'Dark Mode';
+            }
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('contactModal');
+        const openModalBtn = document.getElementById('openModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Handle form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+
+            // Create mailto link with form data
+            const subject = encodeURIComponent(`Message from ${name}`);
+            const body = encodeURIComponent(`From: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:james@wolfejames.com?subject=${subject}&body=${body}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Close modal after short delay
+            setTimeout(() => {
+                modal.classList.remove('active');
+                contactForm.reset();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
