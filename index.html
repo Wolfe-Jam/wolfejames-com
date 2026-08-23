@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WOLFE ∞ JAMES - Format Standardization & AI Infrastructure</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/favicon.png">
+
+    <meta name="description" content="James (Wolfe) Harrison, founder of Wolfe James LLC. Creator of the IANA-registered .faf format for AI context. AAIF Ambassador. 30 years of format standardization experience.">
+
+    <!-- SEO & Professional Discovery -->
+    <meta name="keywords" content="James Harrison, Wolfe James LLC, .faf format, IANA registration, IETF, format standardization, AI context, software architecture, technical standards">
+    <meta name="author" content="James (Wolfe) Harrison">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://wolfejames.com">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wolfejames.com">
+    <meta property="og:title" content="WOLFE ∞ JAMES - Format Standardization Expert">
+    <meta property="og:description" content="Creator of IANA-registered .faf format. AAIF Ambassador. 30 years designing formats that last.">
+    <meta property="og:image" content="https://wolfejames.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://wolfejames.com">
+    <meta property="twitter:title" content="WOLFE ∞ JAMES">
+    <meta property="twitter:description" content="Format standardization and AI infrastructure. IANA + IETF standards work.">
+    <meta property="twitter:image" content="https://wolfejames.com/og-image.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "James Harrison",
+        "alternateName": "James Wolfe Harrison",
+        "jobTitle": "Founder",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Wolfe James LLC"
+        },
+        "description": "Format standardization expert. Creator of IANA-registered .faf format for AI context. AAIF Ambassador.",
+        "url": "https://wolfejames.com",
+        "sameAs": [
+            "https://github.com/Wolfe-Jam",
+            "https://orcid.org/0009-0007-0801-3841",
+            "https://doi.org/10.5281/zenodo.18251362",
+            "https://doi.org/10.5281/zenodo.20348942",
+            "https://doi.org/10.5281/zenodo.21951641",
+            "https://datatracker.ietf.org/doc/draft-wolfe-faf-format/",
+            "https://datatracker.ietf.org/doc/draft-wolfe-faf-agent/",
+            "https://crates.io/crates/rust-faf-mcp",
+            "https://aaif.io",
+            "https://faf.one"
+        ],
+        "knowsAbout": [
+            "Format Standardization",
+            "AI Context Formats",
+            "Software Architecture",
+            "Technical Standards Bodies",
+            "IANA Media Type Registration",
+            "IETF Standards Process"
+        ]
+    }
+    </script>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg-primary: #fefcf8;
+            --bg-secondary: #f9f6f1;
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #7a7a7a;
+            --accent: #FF6B35;
+            --accent-hover: #e55a2b;
+            --border: #e5e5e5;
+            --code-bg: #f5f5f5;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --text-primary: #f5f5f5;
+            --text-secondary: #d0d0d0;
+            --text-muted: #a0a0a0;
+            --accent: #FF6B35;
+            --accent-hover: #ff8a5c;
+            --border: #333333;
+            --code-bg: #262626;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        /* WolfejamGizmo - Signature half-moon theme toggle */
+        .wolfejam-gizmo {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            outline: none;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .wolfejam-gizmo__gradient {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FFF 50%, #121212 50%);
+            transition: transform 0.3s ease;
+            border-radius: 50%;
+        }
+
+        .wolfejam-gizmo__gradient--dark {
+            transform: rotate(180deg);
+        }
+
+        .wolfejam-gizmo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 16px rgba(0, 255, 255, 0.3);
+        }
+
+        .wolfejam-gizmo:active {
+            transform: scale(0.95);
+        }
+
+        .wolfejam-gizmo:focus {
+            outline: 2px solid #00FFFF;
+            outline-offset: 2px;
+        }
+
+        .wolfejam-gizmo:focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        .wolfejam-gizmo__tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 8px;
+            background: #fffccc;
+            color: #000;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .wolfejam-gizmo:hover .wolfejam-gizmo__tooltip {
+            opacity: 1;
+        }
+
+        .wolfejam-gizmo__tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #fffccc;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wolfejam-gizmo,
+            .wolfejam-gizmo * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .wolfejam-gizmo {
+                width: 44px;
+                height: 44px;
+                bottom: 16px;
+                right: 16px;
+            }
+        }
+
+        /* Brand Card - Always black */
+        .brand-card {
+            display: block;
+            max-width: 400px;
+            margin: 32px auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .brand-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .brand-card img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .brand-card {
+                max-width: 320px;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.1;
+            letter-spacing: 0.15em;
+        }
+
+        .hero .subtitle {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 400;
+        }
+
+        .hero .tagline {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Standards Work Section */
+        .standards {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+            border-radius: 16px;
+            margin: 0 24px 80px;
+        }
+
+        .standards-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .standards h2 {
+            font-size: 36px;
+            margin-bottom: 48px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .achievement {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .achievement h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .achievement p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+
+        .achievement-meta {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+        }
+
+        .projects h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 64px;
+            font-weight: 600;
+        }
+
+        .project-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .project-card h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 36px;
+            margin-bottom: 32px;
+            font-weight: 600;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            padding: 12px 24px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .contact-link--accent {
+            background: var(--accent);
+            color: white;
+        }
+
+        .contact-link--accent:hover {
+            background: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px var(--shadow);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-header h3 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--text-primary);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .contact-form button {
+            padding: 12px 24px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .hero h1 {
+                letter-spacing: 0.1em;
+            }
+
+            .standards,
+            .contact {
+                margin: 0 0 60px;
+                padding: 60px 0;
+            }
+
+            .projects {
+                padding: 60px 0;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-link {
+                width: 200px;
+            }
+
+            .modal-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- WolfejamGizmo - Signature theme toggle -->
+    <button class="wolfejam-gizmo" id="themeToggle" aria-label="Toggle theme">
+        <div class="wolfejam-gizmo__gradient" id="themeGradient"></div>
+        <div class="wolfejam-gizmo__tooltip" id="themeTooltip">WolfeJam's Gizmo</div>
+    </button>
+
+    <header>
+        <nav class="container">
+            <a href="#" class="logo">🏎️✨ wolfejam.dev</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>W O L F E &nbsp;∞&nbsp; J A M E S</h1>
+                
+                <!-- Brand Card -->
+                <div class="brand-card">
+                    <img src="/brand-card.png" alt="Software Engineer & Format Architect - Creator of .FAF - Author of The 8 Eternal Cs">
+                </div>
+                
+                <p class="tagline">30 years designing formats that last. From Commodore Amiga to Internet AI standards, building technical infrastructure you can trust for the AI era.</p>
+            </div>
+        </section>
+
+        <section class="standards">
+            <div class="standards-content">
+                <h2>Standards Body Work</h2>
+
+                <div class="achievement" style="border-left: 4px solid #FF702D;">
+                    <h3 style="color: #FF702D;">AAIF Ambassador <span style="display: inline-block; background: #FF702D; color: #000; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; vertical-align: middle; margin-left: 8px;">New</span></h3>
+                    <p>
+                        Founding Ambassador (2026 inaugural cohort) of the Agentic AI Foundation (AAIF) — the Linux Foundation project governing MCP, Goose, and AGENTS.md.
+                    </p>
+                    <p class="achievement-meta">
+                        <a href="https://aaif.io" class="project-link" target="_blank" style="color: #FF702D;">aaif.io</a> • Onboarded June 2026
+                    </p>
+                </div>
+
+                <div class="achievement">
+                    <h3>MCP Registry — Cargo Support</h3>
+                    <p>
+                        Authored and merged <a href="https://github.com/modelcontextprotocol/registry/pull/1207" class="project-link" target="_blank">PR #1207</a> on the official Model Context Protocol Registry, adding Cargo (crates.io) as a first-class package registry type — schema, validator, and integration tests. Opened the documented registration path for the ~1,800 Rust MCP-related crates that previously had only a binary-packaging workaround. <code>rust-faf-mcp</code> was the first live, end-to-end validated example.
+                    </p>
+                    <p class="achievement-meta">Merged June 3, 2026 • modelcontextprotocol/registry</p>
+                </div>
+
+                <div class="achievement" style="border-left: 4px solid #00D4D4;">
+                    <h3 style="color: #00D4D4;">IANA Media Type Registrations — 3</h3>
+                    <p>
+                        Registered three official Internet media types with IANA (Internet Assigned Numbers Authority) — the full FAF format family, each independently registered.
+                        The first, <code>application/vnd.faf+yaml</code>, is the first IANA-registered format with an official Anthropic MCP server.
+                    </p>
+                    <p class="achievement-meta">
+                        <a href="https://www.iana.org/assignments/media-types/application/vnd.faf+yaml" class="project-link" target="_blank" style="color: #00D4D4;">vnd.faf+yaml</a> (Context, Oct 2025) •
+                        <a href="https://www.iana.org/assignments/media-types/application/vnd.fafm+yaml" class="project-link" target="_blank" style="color: #00D4D4;">vnd.fafm+yaml</a> (Memory) •
+                        <a href="https://www.iana.org/assignments/media-types/application/vnd.fafa+yaml" class="project-link" target="_blank" style="color: #00D4D4;">vnd.fafa+yaml</a> (Agent identity)
+                    </p>
+                </div>
+
+                <div class="achievement">
+                    <h3>IETF Internet-Drafts (Datatracker)</h3>
+                    <p>
+                        Two Internet-Drafts filed on the IETF Datatracker: the foundational .faf/.fafm context and memory format specification,
+                        and a follow-on draft defining .fafa — a portable identity format for AI agents.
+                    </p>
+                    <p class="achievement-meta">
+                        <a href="https://datatracker.ietf.org/doc/draft-wolfe-faf-format/" class="project-link" target="_blank">draft-wolfe-faf-format</a> •
+                        <a href="https://datatracker.ietf.org/doc/draft-wolfe-faf-agent/" class="project-link" target="_blank">draft-wolfe-faf-agent-01</a>
+                    </p>
+                </div>
+
+                <div class="achievement" style="border-left: 4px solid #00D4D4;">
+                    <h3 style="color: #00D4D4;">CERN/Zenodo White Papers — 3</h3>
+                    <p>
+                        Three peer-citable academic preprints on Zenodo (CERN), each with its own DOI, covering the full FAF format family:
+                        context, memory, and agent identity.
+                    </p>
+                    <p class="achievement-meta">
+                        <a href="https://doi.org/10.5281/zenodo.18251362" class="project-link" target="_blank" style="color: #00D4D4;">.faf — Format-Driven AI Context Architecture</a><br>
+                        <a href="https://doi.org/10.5281/zenodo.20348942" class="project-link" target="_blank" style="color: #00D4D4;">.fafm — Permanent Memory and Instant Recall</a><br>
+                        <a href="https://doi.org/10.5281/zenodo.21951641" class="project-link" target="_blank" style="color: #00D4D4;">.fafa — Why Agents Need a Passport</a>
+                    </p>
+                </div>
+
+                <div class="achievement">
+                    <h3>W3C Community Groups</h3>
+                    <p>
+                        Member of the AI Agent Protocol Community Group, developing open, interoperable protocols that enable AI agents to discover, identify, and collaborate efficiently across the Web.
+                    </p>
+                    <p>
+                        Also a member of the Autonomous Agents on the Web Community Group, focusing on Web-based multi-agent systems aligned with Web architecture, using Linked Data and Semantic Web standards for hybrid human-agent communities.
+                    </p>
+                    <p class="achievement-meta">November 4, 2025 • Protocol standardization, multi-agent coordination, and Web architecture standards</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects" id="projects">
+            <div class="container">
+                <h2>Notable Projects</h2>
+
+                <div class="project-card">
+                    <h3>.faf Format (Foundational AI-context Format)</h3>
+                    <p>
+                        Universal format for AI project context. IANA-registered, validated by Anthropic (official MCP server),
+                        Google-approved (Chrome extension), and in production use across thousands of projects.
+                    </p>
+                    <p>
+                        <strong>Downloads:</strong> 120,000+ across npm, PyPI, and crates.io<br>
+                        <strong>White Papers:</strong> 3 published on Zenodo (CERN), each with its own DOI<br>
+                        <strong>MCP Servers:</strong> 6 servers across Claude, Grok, Gemini, Cursor/IDE, and native Rust<br>
+                        <strong>Compilers:</strong> TypeScript, Rust (native + WASM), Zig (2.7KB WASM)
+                    </p>
+                    <a href="https://faf.one" class="project-link" target="_blank">Visit faf.one →</a>
+                </div>
+
+                <div class="project-card" style="border-left: 4px solid #FF6B35;">
+                    <h3 style="color: #FF6B35;">The 8 Eternal C's of Computing</h3>
+                    <p style="font-style: italic; color: var(--accent); margin-bottom: 16px;">"Observed in 1995. Proven in 2025."</p>
+                    <p>
+                        A universal framework describing all computation as an eternal cycle of eight operations:
+                        Context, Compile, Control, Cache, Compute, Communicate, Complete, and Cybernetics.
+                    </p>
+                    <p>
+                        The theoretical foundation underlying the .faf architecture. Explains why Context-Mirroring works
+                        and how bi-directional sync enables persistent AI understanding.
+                    </p>
+                    <p>
+                        <strong>Published:</strong> December 8, 2025<br>
+                        <strong>Status:</strong> Theoretical framework underlying .faf architecture
+                    </p>
+                    <a href="https://devtools.faf.one/8cs" class="project-link" target="_blank" style="color: #FF6B35;">Interactive Overview →</a>
+                    <a href="https://devtools.faf.one/8-eternal-cs" class="project-link" target="_blank" style="color: #FF6B35; margin-left: 16px;">Read the Paper →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>MCP Server Ecosystem (Claude, Grok, Gemini, Cursor/IDE)</h3>
+                    <p>
+                        <strong>First Anthropic-approved persistent project context server.</strong>
+                        Official MCP implementation merged into Anthropic's registry (PR #2759, October 2025).
+                        Expanded to 6 MCP servers across 4 AI platforms.
+                    </p>
+                    <p>
+                        <strong>claude-faf-mcp:</strong> Official Anthropic MCP server, Desktop Extension (.mcpb)<br>
+                        <strong>faf-cli:</strong> Universal CLI (npm + Homebrew)<br>
+                        <strong>grok-faf-mcp:</strong> xAI Grok integration (npm)<br>
+                        <strong>gemini-faf-mcp:</strong> Google Gemini integration (PyPI)<br>
+                        <strong>faf-mcp:</strong> Cursor / IDEs / VS Code integration (npm)<br>
+                        <strong>rust-faf-mcp / faf-rust-sdk:</strong> Native Rust MCP server + SDK (crates.io)
+                    </p>
+                    <p>
+                        <strong>Status:</strong> Production on 3 registries (npm, PyPI, crates.io)<br>
+                        <strong>Total Ecosystem Downloads:</strong> 120,000+<br>
+                        <strong>Architecture:</strong> stdio transport, Desktop Extension (.mcpb), native Rust + WASM compile targets
+                    </p>
+                    <a href="https://faf.one/downloads" class="project-link" target="_blank">All Downloads →</a>
+                    <a href="https://github.com/Wolfe-Jam/claude-faf-mcp" class="project-link" target="_blank" style="margin-left: 12px;">View on GitHub →</a>
+                    <a href="https://crates.io/crates/rust-faf-mcp" class="project-link" target="_blank" style="margin-left: 12px;">View on crates.io →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>AGENTS.md — NONE → GOOD → BETTER → BEST</h3>
+                    <p>
+                        A four-stage maturity model for agent instruction files: no AGENTS.md, any AGENTS.md, a facts-based AGENTS.md that stays true, and that discipline plus <code>project.faf</code> as the structured source of truth underneath it.
+                    </p>
+                    <p>
+                        <strong>agents-md-facts:</strong> authors AGENTS.md from a repo's real facts — commands, entry points, conventions. Nothing invented.<br>
+                        <strong>mcp-better:</strong> applies the same discipline to MCP tool catalogs — a live host was found still running an outdated version against a newer published registry, a real example of the exact drift problem it exists to catch.
+                    </p>
+                    <p class="achievement-meta">Featured by the Agentic AI Foundation on LinkedIn, August 2026 — "MCP mid-call is where 'honest tool catalog' and 'actually works' split."</p>
+                    <a href="https://github.com/Wolfe-Jam/agents-md-facts" class="project-link" target="_blank">agents-md-facts on GitHub →</a>
+                    <a href="https://github.com/Wolfe-Jam/mcp-better" class="project-link" target="_blank" style="margin-left: 12px;">mcp-better on GitHub →</a>
+                    <a href="https://lnkd.in/p/ec_ZFp8x" class="project-link" target="_blank" style="margin-left: 12px;">View AAIF's post →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>slash-tokens — Token Optimization for Context Engineers</h3>
+                    <p>
+                        Pre-flight token checks for LLM API calls. Know the cost before the call leaves your machine. 4.8KB WASM engine, sub-millisecond estimation, zero dependencies.
+                    </p>
+                    <p>
+                        <strong>Features:</strong> Evaluate, route, abort — 90%+ tokens salvaged<br>
+                        <strong>Supports:</strong> Claude, GPT, Grok, Gemini<br>
+                        <strong>Downloads:</strong> 1,200+ (npm)
+                    </p>
+                    <a href="https://mcpaas.live/slash" class="project-link" target="_blank">Visit slashtokens.com →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Historical Format Work (1995-2025)</h3>
+                    <p>
+                        <strong>Commodore Amiga .iff format (1994-1995):</strong> Early exposure to interchange file formats that shaped approach to format design.
+                    </p>
+                    <p>
+                        <strong>Carpet Industry .prj format (1995):</strong> Created format for design specifications used by manufacturers across US, UK, Europe, India, Australia, and New Zealand. Still in use today.
+                    </p>
+                    <p>
+                        <strong>CAD-SIM .sim format (2000-2016):</strong> Digital simulation format for US Carpet Industry.
+                        Deployed industry-wide at scale. Technology acquired by Shaw Industries (Berkshire Hathaway) in 2016.
+                    </p>
+                    <p>
+                        <strong>HEX CODES - Hextra.io (2020-2025, ongoing):</strong> In-depth exploration of HEX/RGB/HSV-L color-space.
+                        Research and development in color format standardization and computational color theory.
+                    </p>
+                    <p>
+                        <strong>AI R&D and Testing (2023-present):</strong> Extensive AI exploration and testing methodology development.
+                        Built WJTTC (WolfeJam Technical & Testing Center) - F1-inspired testing framework applying championship-grade standards to software development.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="contact">
+            <div class="container">
+                <h2>Contact & Credentials</h2>
+                <div class="contact-links">
+                    <button class="contact-link" id="openModal">Drop a Line</button>
+                    <a href="https://github.com/Wolfe-Jam" class="contact-link" target="_blank">GitHub</a>
+                    <a href="https://orcid.org/0009-0007-0801-3841" class="contact-link" target="_blank">ORCID</a>
+                    <a href="https://doi.org/10.5281/zenodo.18251362" class="contact-link" target="_blank">Zenodo/CERN</a>
+                    <a href="https://faf.one" class="contact-link" target="_blank">faf.one</a>
+                    <a href="https://devtools.faf.one/8cs" class="contact-link contact-link--accent" target="_blank">The 8 C's</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Drop a Line</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Quick message (one-liner is fine)" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Wolfe James LLC. <a href="https://www.iana.org/assignments/media-types/application/vnd.faf+yaml" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">IANA-registered format creator</a>. <a href="https://www.npmjs.com/package/claude-faf-mcp" target="_blank" rel="noopener noreferrer" style="color: var(--text-primary); text-decoration: underline;">Official Anthropic MCP server maintainer</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // WolfejamGizmo theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeGradient = document.getElementById('themeGradient');
+        const themeTooltip = document.getElementById('themeTooltip');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        updateTheme(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateTheme(newTheme);
+        });
+
+        function updateTheme(theme) {
+            if (theme === 'dark') {
+                themeGradient.classList.add('wolfejam-gizmo__gradient--dark');
+            } else {
+                themeGradient.classList.remove('wolfejam-gizmo__gradient--dark');
+            }
+            // Tooltip stays as "WolfeJam's Gizmo" always
+        }
+
+        // Modal functionality
+        const modal = document.getElementById('contactModal');
+        const openModalBtn = document.getElementById('openModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const contactForm = document.getElementById('contactForm');
+
+        openModalBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Handle form submission
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+
+            // Create mailto link with form data
+            const subject = encodeURIComponent(`Message from ${name}`);
+            const body = encodeURIComponent(`From: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
+            const mailtoLink = `mailto:james@wolfejames.com?subject=${subject}&body=${body}`;
+
+            // Open email client
+            window.location.href = mailtoLink;
+
+            // Close modal after short delay
+            setTimeout(() => {
+                modal.classList.remove('active');
+                contactForm.reset();
+            }, 500);
+        });
+    </script>
+</body>
+</html>
